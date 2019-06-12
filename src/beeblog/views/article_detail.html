@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  {{template "header.tpl" .}}
+
+  <body>
+
+    <div class="blog-masthead">
+      <div class="container">
+        <nav class="blog-nav">
+          <a class="blog-nav-item active" href="/">Home</a>          
+        </nav>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="blog-header">
+       
+      </div>
+
+      <div class="row">
+
+        <div class="col-sm-8 blog-main">
+         <div class="blog-post">
+            <h2 class="blog-post-title">{{.Article.Title}}</h2>
+            <p class="blog-post-meta">{{.Article.CreatedAt | formatTime}} by <a href="https://github.com/wyr6512/beegoblog">wyr6512</a></p>
+
+            <p>{{.Article.Abstract}}</p>
+            <hr>
+            <p>{{str2html .Content.Content}}</p>
+          </div><!-- /.blog-post -->
+
+          {{template "pager.tpl" .}}
+
+        </div><!-- /.blog-main -->
+
+        {{template "right.tpl" .}}
+
+      </div><!-- /.row -->
+
+    </div><!-- /.container -->
+
+    <footer class="blog-footer">
+      <p>Blog built by <a href="https://github.com/wyr6512">@wyr6512</a>.</p>
+      <p>
+        <a href="#">Back to top</a>
+      </p>
+    </footer>
+
+
+  </body>
+</html>
+
