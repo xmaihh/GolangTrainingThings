@@ -25,7 +25,7 @@ Beego will parse the `conf/app.conf` file by default.
 
 ```shell
 appname = beeblog
-httpport = 9999
+httpport = 8088
 runmoe = dev
 
 dbhost = 127.0.0.1
@@ -51,4 +51,14 @@ $ go get github.com/beego/bee
 $ go run main.go
 ```
 
-![](https://i.loli.net/2019/06/12/5d00bc033e35f28300.png)
+Visting http://localhost:8088/ with a web browser will display your app running:
+
+![](https://i.loli.net/2019/06/14/5d0305e2e3c4e35887.png)
+
+# Reference
+
+[beego](https://beego.me)
+
+[beegoblog](https://github.com/wyr6512/beegoblog)
+
+[Build web application with Golang](https://legacy.gitbook.com/book/astaxie/build-web-application-with-golang/details)

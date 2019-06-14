@@ -1,19 +1,33 @@
 package main
 
 import (
-    "beeblog/models"
-    
-    "github.com/astaxie/beego"
+	"beeblog/models"
+	_ "beeblog/routers"
+	"beeblog/util"
+	"net/http"
 
-    "strings"
-    "time"
+	"github.com/astaxie/beego/context"
+
+	"github.com/astaxie/beego"
+
+	"strings"
+	"time"
 )
 
 func main() {
 	beego.AddFuncMap("processTags", processTags)
 	beego.AddFuncMap("getCateName", getCateName)
 	beego.AddFuncMap("formatTime", formatTime)
+	//后台鉴权
+	beego.InsertFilter("/admin/*", beego.BeforeRouter, func(ctx *context.Context) {
+		cookie, err := ctx.Request.Cookie("Authorization")
+		beego.Error(cookie)
+		if err != nil || !util.CheckToken(cookie.Value) {
 
+			http.Redirect(ctx.ResponseWriter, ctx.Request, "/login", 302)
+
+		}
+	})
 	beego.Run()
 }
 
