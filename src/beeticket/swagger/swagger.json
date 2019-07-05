@@ -1,0 +1,621 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Get a ticket API",
+        "description": "A program to receive QR code tickets online.",
+        "version": "1.0.0",
+        "termsOfService": "http://beego.me/",
+        "contact": {
+            "email": "https://github.com/xmaihh/GolangTrainingThings"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "basePath": "/v1",
+    "paths": {
+        "/admin/": {
+            "get": {
+                "tags": [
+                    "admin"
+                ],
+                "description": "get all admins",
+                "operationId": "AdminController.GetAll",
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.Admin"
+                        }
+                    },
+                    "403": {
+                        "description": ":adminId is empty"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "admin"
+                ],
+                "description": "create admin",
+                "operationId": "AdminController.Create",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "The Admin content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Admin"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{string} models.Admin.Id"
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
+        "/admin/login": {
+            "get": {
+                "tags": [
+                    "admin"
+                ],
+                "description": "Logs admin into the system",
+                "operationId": "AdminController.Login",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "username",
+                        "description": "The username for login",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "password",
+                        "description": "The password for login",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{string} login success"
+                    },
+                    "403": {
+                        "description": "admin not exist"
+                    }
+                }
+            }
+        },
+        "/admin/logout": {
+            "get": {
+                "tags": [
+                    "admin"
+                ],
+                "description": "Logs out current logged in admin session",
+                "operationId": "AdminController.logout",
+                "responses": {
+                    "200": {
+                        "description": "{string} logout success"
+                    }
+                }
+            }
+        },
+        "/admin/{adminId}": {
+            "get": {
+                "tags": [
+                    "admin"
+                ],
+                "description": "find admin by adminId",
+                "operationId": "AdminController.Get",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "adminId",
+                        "description": "the adminId you want to get",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.Admin"
+                        }
+                    },
+                    "403": {
+                        "description": ":adminId is empty"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "admin"
+                ],
+                "description": "update the admin",
+                "operationId": "AdminController.Update",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "adminId",
+                        "description": "The adminId you want to update",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "The body about Admin",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Admin"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.Admin"
+                        }
+                    },
+                    "403": {
+                        "description": ":adminId is empty"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "admin"
+                ],
+                "description": "delete the admin",
+                "operationId": "AdminController.Delete",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "adminId",
+                        "description": "The adminId you wnat to delete",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{string} delete success!"
+                    },
+                    "403": {
+                        "description": "adminId is empty"
+                    }
+                }
+            }
+        },
+        "/ticket/": {
+            "get": {
+                "tags": [
+                    "ticket"
+                ],
+                "description": "get all tickets",
+                "operationId": "TicketController.GetAll",
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.Ticket"
+                        }
+                    },
+                    "403": {
+                        "description": ":ticketId is empty"
+                    }
+                }
+            }
+        },
+        "/ticket/\t[post]": {
+            "get": {
+                "tags": [
+                    "ticket"
+                ],
+                "operationId": "TicketController.Create",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "The Ticket content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Ticket"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{string} models.Ticket.TicketId"
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
+        "/ticket/{ticketId}": {
+            "get": {
+                "tags": [
+                    "ticket"
+                ],
+                "description": "get a ticket by ticketId",
+                "operationId": "TicketController.Get",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "ticketId",
+                        "description": "The ticketId you want to get",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.Ticket"
+                        }
+                    },
+                    "403": {
+                        "description": ":ticketId is empty"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "ticket"
+                ],
+                "description": "update the ticket",
+                "operationId": "TicketController.Update",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "ticketId",
+                        "description": "The ticketId you want to update",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for ticket content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Ticket"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.Ticket"
+                        }
+                    },
+                    "403": {
+                        "description": ":ticketId is empty"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "ticket"
+                ],
+                "description": "delete the ticket",
+                "operationId": "TicketController.Delete",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "ticketId",
+                        "description": "The ticketId you want to delete",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{string} delete success!"
+                    },
+                    "403": {
+                        "description": "ticketId is empty"
+                    }
+                }
+            }
+        },
+        "/user/": {
+            "get": {
+                "tags": [
+                    "user"
+                ],
+                "description": "get all Users",
+                "operationId": "UserController.GetAll",
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.User"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "description": "create users",
+                "operationId": "UserController.CreateUser",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for user content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.User"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{int} models.User.Id"
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
+        "/user/login": {
+            "get": {
+                "tags": [
+                    "user"
+                ],
+                "description": "Logs user into the system",
+                "operationId": "UserController.Login",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "username",
+                        "description": "The username for login",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "password",
+                        "description": "The password for login",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{string} login success"
+                    },
+                    "403": {
+                        "description": "user not exist"
+                    }
+                }
+            }
+        },
+        "/user/logout": {
+            "get": {
+                "tags": [
+                    "user"
+                ],
+                "description": "Logs out current logged in user session",
+                "operationId": "UserController.logout",
+                "responses": {
+                    "200": {
+                        "description": "{string} logout success"
+                    }
+                }
+            }
+        },
+        "/user/{uid}": {
+            "get": {
+                "tags": [
+                    "user"
+                ],
+                "description": "get user by uid",
+                "operationId": "UserController.Get",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "uid",
+                        "description": "The key for staticblock",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.User"
+                        }
+                    },
+                    "403": {
+                        "description": ":uid is empty"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "user"
+                ],
+                "description": "update the user",
+                "operationId": "UserController.Update",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "uid",
+                        "description": "The uid you want to update",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for user content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.User"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.User"
+                        }
+                    },
+                    "403": {
+                        "description": ":uid is not int"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "user"
+                ],
+                "description": "delete the user",
+                "operationId": "UserController.Delete",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "uid",
+                        "description": "The uid you want to delete",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{string} delete success!"
+                    },
+                    "403": {
+                        "description": "uid is empty"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "models.Admin": {
+            "title": "Admin",
+            "required": [
+                "ID",
+                "Username",
+                "Password",
+                "Totalcode",
+                "Exp",
+                "Userlimit"
+            ],
+            "type": "object",
+            "properties": {
+                "Exp": {
+                    "description": "expired",
+                    "type": "string"
+                },
+                "ID": {
+                    "description": "admin id",
+                    "type": "string"
+                },
+                "Password": {
+                    "description": "admin password",
+                    "type": "string"
+                },
+                "Totalcode": {
+                    "description": "total code",
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "Userlimit": {
+                    "description": "userlimit",
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "Username": {
+                    "description": "admin username",
+                    "type": "string"
+                }
+            }
+        },
+        "models.Ticket": {
+            "title": "Ticket",
+            "type": "object",
+            "properties": {
+                "Exp": {
+                    "type": "string"
+                },
+                "Field": {
+                    "type": "string"
+                },
+                "TicketId": {
+                    "type": "string"
+                },
+                "Ticketcode": {
+                    "type": "string"
+                },
+                "Ticketdesc": {
+                    "type": "string"
+                },
+                "UserId": {
+                    "type": "string"
+                },
+                "Usestatus": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        },
+        "models.User": {
+            "title": "User",
+            "type": "object",
+            "properties": {
+                "CreatedAt": {
+                    "type": "string"
+                },
+                "Id": {
+                    "type": "string"
+                },
+                "Password": {
+                    "type": "string"
+                },
+                "UpdatedAt": {
+                    "type": "string"
+                },
+                "Username": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "user",
+            "description": "Operations about Users\n"
+        },
+        {
+            "name": "ticket",
+            "description": "Operations about Ticket\n"
+        },
+        {
+            "name": "admin",
+            "description": "Operations about Admin\n"
+        }
+    ]
+}
